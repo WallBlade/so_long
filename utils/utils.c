@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:29:15 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/29 15:45:20 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:40:44 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,18 @@ int	ft_print_error(int error)
 	else if (error == 3)
 		write(2, "Invalid file/filename\n", 22);
 	exit (EXIT_FAILURE);
+}
+
+int	is_valid(char c, char *valid)
+{
+	int	i;
+
+	i = 0;
+	while (valid[i])
+	{
+		if (c == valid[i])
+			return (1);
+		i++;
+	}
+	return (0);
 }

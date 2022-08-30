@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:10:43 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/29 16:59:49 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:56:28 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	check_file(char **argv)
 {
 	int		fd;
 	int		len;
-	char	*buffer;
 	char	*valid;
 
 	len = ft_strlen(argv[1]) - 4;
@@ -24,18 +23,40 @@ int	check_file(char **argv)
 	if (ft_strncmp(&argv[1][len], valid, 4) != 0)
 		ft_print_error(3);
 	fd = open(argv[1], O_RDONLY);
-	if (fd < 0 || fd > FOPEN_MAX || read(fd, buffer, 1) <= 0)
+	if (fd < 0)
 		ft_print_error(3);
 	return (fd);
 }
 
-char	**parse_map(char **argv, int fd)
+int	check_chars(char **map, t_data *data)
+{
+	int		i;
+	int		j;
+	char	*valid;
+
+	i = 0;
+	valid = "01CEP";
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j] != '\n')
+		{
+			if (!is_valid(map[i][j], valid))
+				return (ERROR);
+			j++;
+		}
+		i++;
+	}
+}
+
+char	**parse_map(char **argv, t_data *data)
 {
 	char	**map;
-	int i = 0;
+	int		fd;
+	int 	i;
 
-	check_file(argv);
-	map = get_next_line(fd);
-	while (map[i])
-		printf("%s", map[i++]);
+	i = 0;
+	fd = check_file(argv);
+	map = get_all_map(fd, argv);
+	return (map);
 }

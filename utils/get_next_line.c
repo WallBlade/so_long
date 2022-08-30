@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 13:28:24 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/29 17:01:34 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:20:58 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ char	*ft_clean(char *stash, char *buf)
 	return (line);
 }
 
-char	**get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	int			i;
 	int			res;
 	char		*line;
 	char		*stash;
@@ -50,7 +49,6 @@ char	**get_next_line(int fd)
 
 	res = BUFFER_SIZE;
 	stash = NULL;
-	i = 0;
 	stash = ft_strjoin(stash, buf);
 	while (res == BUFFER_SIZE && !ft_strchr(buf))
 	{
@@ -62,9 +60,26 @@ char	**get_next_line(int fd)
 			return (free(stash), NULL);
 		stash = ft_strjoin(stash, buf);
 	}
-	line[i] = ft_clean(stash, buf);
-	i++;
-	if (res > 0)
-		get_next_line(fd);
+	line = ft_clean(stash, buf);
 	return (free(stash), line);
+}
+
+char	**get_all_map(int fd, char **argv)
+{
+	int		i;
+	int		size;
+	char	**map;
+
+	i = 0;
+	size = count_lines(argv);
+	map = malloc(sizeof(char *) * (size + 1));
+	if (!map)
+		return (NULL);
+	while (size-- > 0)
+	{
+		map[i] = get_next_line(fd);
+		i++;
+	}
+	map[i] = 0;
+	return (map);
 }

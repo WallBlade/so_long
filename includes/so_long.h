@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:06:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/29 17:00:25 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:48:28 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,29 @@ typedef	struct s_img
 	int		height;
 }	t_img;
 
+typedef	struct s_map
+{
+	int	x;
+	int	y;
+	int	c;
+	int	e;
+	int	p;
+}	t_map;
+
 typedef	struct s_data
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
 	t_img	img;
+	t_map	map;
 }	t_data;
 
 
 
 //--------------- PARSING ---------------//
 
-int	check_file(char **argv);
+int		check_file(char **argv);
+char	**parse_map(char **argv);
 
 //--------------- MAIN ---------------//
 
@@ -64,12 +75,15 @@ int		keypress_handle(int keysym, t_data *data);
 
 //--------------- UTILS ---------------//
 
-char	**get_next_line(int fd);
+char	*get_next_line(int fd);
+char	**get_all_map(int fd, char **argv);
 int		ft_strchr(const char *str);
+int		count_lines(char **argv);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *src);
 int		ft_print_error(int error);
 int		ft_strncmp(char *s1, char *s2, int n);
+int		is_valid(char c, char *valid);
 
 #endif
