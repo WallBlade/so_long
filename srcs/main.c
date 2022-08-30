@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:22:41 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/30 14:34:01 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/08/30 23:33:20 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 
 int main(int argc, char **argv)
 {
+	t_data	data;
+	
+	// data = NULL;
 	if (argc != 2)
 		ft_print_error(2);
-	parse_map(argv);
+	parse_map(argv, &data);
 	return (0);
 }
 

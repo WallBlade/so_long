@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:29:15 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/30 17:40:44 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/08/30 23:57:22 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,42 @@ int	ft_print_error(int error)
 		write(2, "Wrong number of arguments\n", 26);
 	else if (error == 3)
 		write(2, "Invalid file/filename\n", 22);
+	else if (error == 4)
+		write(2, "Invalid map\n", 12);
 	exit (EXIT_FAILURE);
 }
 
-int	is_valid(char c, char *valid)
+int	is_valid(char *str, t_data *data, int i)
 {
 	int	i;
+	int	j;
+	char *valid;
 
 	i = 0;
-	while (valid[i])
+	valid = "01CEP";
+	printf("width = %d\tlen = %d\n", data->map.width, ft_strlen(str));
+	if ((ft_strlen(str) - 1) != data->map.width)
+		return (1);
+	while (str[i] && str[i] != '\n')
 	{
-		if (c == valid[i])
+		j = 0;
+		while (valid[j] && valid[j] != str[i])
+			j++;
+		if (valid[j] == '\0')
 			return (1);
 		i++;
 	}
 	return (0);
+}
+
+void	ft_putstr(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
 }

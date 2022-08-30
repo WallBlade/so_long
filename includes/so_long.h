@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:06:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/30 17:48:28 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/08/30 23:49:50 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,26 @@ typedef	struct s_img
 	int		height;
 }	t_img;
 
-typedef	struct s_map
+typedef	struct s_pos
 {
 	int	x;
 	int	y;
-	int	c;
-	int	e;
-	int	p;
+}	t_pos;
+
+
+typedef	struct s_map
+{
+	int		width;
+	int		height;
+	int		c;
+	t_pos	player;
 }	t_map;
 
 typedef	struct s_data
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
-	t_img	img;
+	t_img	*img;
 	t_map	map;
 }	t_data;
 
@@ -62,7 +68,8 @@ typedef	struct s_data
 //--------------- PARSING ---------------//
 
 int		check_file(char **argv);
-char	**parse_map(char **argv);
+char	**parse_map(char **argv, t_data *data);
+int		check_map(char **map, t_data *data);
 
 //--------------- MAIN ---------------//
 
@@ -82,8 +89,9 @@ int		count_lines(char **argv);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *src);
-int		ft_print_error(int error);
+int		ft_print_error();
 int		ft_strncmp(char *s1, char *s2, int n);
-int		is_valid(char c, char *valid);
+int		is_valid(char *str, t_data *data);
+void	ft_putstr(char *str);
 
 #endif
