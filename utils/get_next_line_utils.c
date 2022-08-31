@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 13:28:18 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/30 23:54:30 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/08/31 16:04:57 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_strlen(char *str)
 
 	i = 0;
 	if (!str)
-		return (0);
+		return (ERROR);
 	while (str[i])
 		i++;
 	return (i);
@@ -31,7 +31,7 @@ char	*ft_strdup(char *src)
 
 	dup = malloc(sizeof(char) * (ft_strlen(src) + 1));
 	if (!dup)
-		return (0);
+		return (ERROR);
 	i = 0;
 	while (src[i])
 	{
@@ -71,15 +71,15 @@ int	ft_strchr(const char *str)
 	int		i;
 
 	if (!str)
-		return (0);
+		return (ERROR);
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '\n')
-			return (1);
+			return (SUCCESS);
 		i++;
 	}
-	return (0);
+	return (ERROR);
 }
 
 int		count_lines(char **argv)

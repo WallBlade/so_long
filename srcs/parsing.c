@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:10:43 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/30 23:57:14 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/08/31 16:03:34 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ int	check_map(char **map, t_data *data)
 	data->map.width = ft_strlen(map[i]) - 1;
 	while (map[i])
 	{
-		if (is_valid(map[i], data, i))
-			ft_print_error(4);
+		if (!is_valid(map[i], data, i))
+			return (ERROR);
+		if ((ft_strlen(map[i]) - 1) != data->map.width)
+			return (ERROR);
 		i++;
 	}
-	data->map.height = i;
-	return (0);
+	return (SUCCESS);
 }
 
 char	**parse_map(char **argv, t_data *data)
@@ -50,8 +51,11 @@ char	**parse_map(char **argv, t_data *data)
 	int		fd;
 
 	fd = check_file(argv);
-	map = get_all_map(fd, argv);
-	check_map(map, data);
-	printf("height = %d\twidth = %d\n", data->map.height, data->map.width);
+	map = get_all_map(fd, argv, data);
+	if (!check_map(map, data))
+	{
+		ft_freetab(map, data->map.height);
+		ft_print_error(4);
+	}
 	return (map);
 }

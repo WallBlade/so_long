@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 13:28:24 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/30 23:53:33 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/08/31 15:31:29 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ char	*ft_clean(char *stash, char *buf)
 	i = 0;
 	while (stash[i] != '\n' && stash[i])
 		i++;
-	if (stash[i] == '\n')
-		i++;
 	j = 0;
 	line = malloc(sizeof(char) * (i + 1));
 	if (!line)
@@ -34,6 +32,7 @@ char	*ft_clean(char *stash, char *buf)
 	}
 	line[j] = '\0';
 	j = 0;
+	i++;
 	while (stash[i] && buf[j])
 		buf[j++] = stash[i++];
 	buf[j] = '\0';
@@ -64,7 +63,7 @@ char	*get_next_line(int fd)
 	return (free(stash), line);
 }
 
-char	**get_all_map(int fd, char **argv)
+char	**get_all_map(int fd, char **argv, t_data *data)
 {
 	int		i;
 	int		size;
@@ -75,11 +74,13 @@ char	**get_all_map(int fd, char **argv)
 	map = malloc(sizeof(char *) * (size + 1));
 	if (!map)
 		return (NULL);
+	data->map.height = size;
 	while (size-- > 0)
 	{
 		map[i] = get_next_line(fd);
 		i++;
 	}
+	data->map.width = ft_strlen(map[0]);
 	map[i] = NULL;
 	return (map);
 }

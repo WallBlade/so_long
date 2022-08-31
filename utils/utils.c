@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:29:15 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/30 23:57:22 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/08/31 19:17:20 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,37 +86,30 @@ int	ft_print_error(int error)
 	exit (EXIT_FAILURE);
 }
 
-int	is_valid(char *str, t_data *data, int i)
+int	is_valid(char *str, t_data *data, int c)
 {
-	int	i;
-	int	j;
-	char *valid;
+	int		i;
+	static int	p;
+	static int	e;
 
 	i = 0;
-	valid = "01CEP";
-	printf("width = %d\tlen = %d\n", data->map.width, ft_strlen(str));
-	if ((ft_strlen(str) - 1) != data->map.width)
-		return (1);
-	while (str[i] && str[i] != '\n')
-	{
-		j = 0;
-		while (valid[j] && valid[j] != str[i])
-			j++;
-		if (valid[j] == '\0')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
+	p = 0;
+	e = 0;
 	while (str[i])
 	{
-		write(1, &str[i], 1);
+		printf("str[i] = %c\n", str[i]);
+		if (str[i] == 'C')
+			data->map.collectible += 1;
+		if (str[i] == 'P')
+			p++;
+		if (str[i] == 'E')
+			e++;
+		if ((!is_surrounded(c, i, str[i], data)) || (!check_char("01CEP", str[i])))
+			return (ERROR);
 		i++;
 	}
+	printf("player = %d\texit = %d\tcollectible = %d\n", p, e, data->map.collectible);
+	if (c == data->map.height && (data->map.collectible < 1 || p != 1 || e != 1))
+		return (ERROR);
+	return (SUCCESS);
 }
