@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 13:28:24 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/31 15:31:29 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:57:46 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ char	*ft_clean(char *stash, char *buf)
 	}
 	line[j] = '\0';
 	j = 0;
-	i++;
 	while (stash[i] && buf[j])
-		buf[j++] = stash[i++];
+		buf[j++] = stash[++i];
 	buf[j] = '\0';
 	return (line);
 }

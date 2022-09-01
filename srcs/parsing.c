@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:10:43 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/31 16:03:34 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/01 15:00:46 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	check_map(char **map, t_data *data)
 			return (ERROR);
 		i++;
 	}
+	if (data->map.collectible < 1 || data->map.p != 1 || data->map.e != 1)
+		return (ERROR);
 	return (SUCCESS);
 }
 

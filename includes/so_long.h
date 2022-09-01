@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:06:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/31 19:04:40 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/01 15:48:15 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@
 # define SUCCESS 1
 # define BUFFER_SIZE 1024
 
-// # define RED_PIXEL 0xFF0000
-// # define GREEN_PIXEL 0xFF00
-// # define WHITE_PIXEL 0xFFFFFF
-
 typedef	struct s_img
 {
 	void	*mlx_img;
@@ -53,6 +49,8 @@ typedef	struct s_map
 	int		width;
 	int		height;
 	int		collectible;
+	int		p;
+	int		e;
 	t_pos	player;
 }	t_map;
 

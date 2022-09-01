@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:29:15 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/31 19:17:20 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/01 15:43:22 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,27 +89,19 @@ int	ft_print_error(int error)
 int	is_valid(char *str, t_data *data, int c)
 {
 	int		i;
-	static int	p;
-	static int	e;
 
 	i = 0;
-	p = 0;
-	e = 0;
 	while (str[i])
 	{
-		printf("str[i] = %c\n", str[i]);
 		if (str[i] == 'C')
 			data->map.collectible += 1;
 		if (str[i] == 'P')
-			p++;
+			data->map.p += 1;
 		if (str[i] == 'E')
-			e++;
+			data->map.e += 1;
 		if ((!is_surrounded(c, i, str[i], data)) || (!check_char("01CEP", str[i])))
 			return (ERROR);
 		i++;
 	}
-	printf("player = %d\texit = %d\tcollectible = %d\n", p, e, data->map.collectible);
-	if (c == data->map.height && (data->map.collectible < 1 || p != 1 || e != 1))
-		return (ERROR);
 	return (SUCCESS);
 }

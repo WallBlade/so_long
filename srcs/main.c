@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:22:41 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/31 15:49:43 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/01 15:58:01 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,21 @@
 int main(int argc, char **argv)
 {
 	t_data	data;
-	
+
 	ft_bzero(&data, sizeof(data));
+	(void)argv;
 	if (argc != 2)
 		ft_print_error(2);
-	parse_map(argv, &data);
+	data.mlx_ptr = mlx_init();
+	if (!data.mlx_ptr)
+		return (ERROR);
+	data.mlx_win = mlx_new_window(data.mlx_ptr, WIDTH, HEIGHT, "so_long");
+	if (!data.mlx_win)
+		return (free(data.mlx_win), ERROR);
+	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, &keypress_handle, &data);
+	mlx_loop(data.mlx_ptr);
+	mlx_destroy_display(data.mlx_ptr);
+	free(data.mlx_ptr);
 	return (0);
 }
 
