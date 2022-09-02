@@ -1,5 +1,5 @@
 SRC		=	srcs/main.c srcs/events.c utils/get_next_line.c utils/get_next_line_utils.c utils/utils.c \
-			srcs/parsing.c utils/utils_1.c \
+			srcs/parsing.c utils/utils_1.c srcs/display.c\
 
 OBJ		= $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:06:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/01 15:48:15 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/02 19:16:18 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,9 @@
 # include <stddef.h>
 # include <fcntl.h>
 
-# define WIDTH 1440
-# define HEIGHT 720
-
 # define ERROR 0
 # define SUCCESS 1
 # define BUFFER_SIZE 1024
-
-typedef	struct s_img
-{
-	void	*mlx_img;
-	char	*addr;
-	int		width;
-	int		height;
-}	t_img;
 
 typedef	struct s_pos
 {
@@ -48,9 +37,10 @@ typedef	struct s_map
 {
 	int		width;
 	int		height;
-	int		collectible;
+	int		c;
 	int		p;
 	int		e;
+	t_pos	pos;
 	t_pos	player;
 }	t_map;
 
@@ -58,7 +48,6 @@ typedef	struct s_data
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
-	t_img	*img;
 	t_map	map;
 }	t_data;
 
@@ -67,8 +56,9 @@ typedef	struct s_data
 //--------------- PARSING ---------------//
 
 int		check_file(char **argv);
-char	**parse_map(char **argv, t_data *data);
 int		check_map(char **map, t_data *data);
+char	**parse_map(char **argv, t_data *data);
+void	global_init(char **argv);
 
 //--------------- MAIN ---------------//
 
@@ -96,5 +86,6 @@ void	ft_bzero(void *s, size_t n);
 int		check_char(char *valid, char c);
 void	ft_putstr(char *str);
 int		is_surrounded(int c, int i, char k, t_data *data);
+void	display_map(char **map, t_data *data);
 
 #endif

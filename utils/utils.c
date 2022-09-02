@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:29:15 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/01 15:43:22 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/02 18:45:47 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	is_valid(char *str, t_data *data, int c)
 	while (str[i])
 	{
 		if (str[i] == 'C')
-			data->map.collectible += 1;
+			data->map.c += 1;
 		if (str[i] == 'P')
 			data->map.p += 1;
 		if (str[i] == 'E')

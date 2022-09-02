@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:10:43 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/01 15:00:46 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/02 19:16:59 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_map(char **map, t_data *data)
 			return (ERROR);
 		i++;
 	}
-	if (data->map.collectible < 1 || data->map.p != 1 || data->map.e != 1)
+	if (data->map.c < 1 || data->map.p != 1 || data->map.e != 1)
 		return (ERROR);
 	return (SUCCESS);
 }
@@ -60,4 +60,25 @@ char	**parse_map(char **argv, t_data *data)
 		ft_print_error(4);
 	}
 	return (map);
+}
+
+void	global_init(char **argv)
+{
+	t_data	data;
+	char	**map;
+
+	ft_bzero(&data, sizeof(data));
+		data.mlx_ptr = mlx_init();
+	if (!data.mlx_ptr)
+		return ;
+	map = parse_map(argv, &data);
+	printf("map size = %d\t%d\n", data.map.width, data.map.height);
+	data.mlx_win = mlx_new_window(data.mlx_ptr, data.map.width * 50, data.map.height * 50, "so_long");
+	if (!data.mlx_win)
+		return (free(data.mlx_win));
+	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, &keypress_handle, &data);
+	display_map(map, &data);
+	mlx_loop(data.mlx_ptr);
+	mlx_destroy_display(data.mlx_ptr);
+	free(data.mlx_ptr);
 }
