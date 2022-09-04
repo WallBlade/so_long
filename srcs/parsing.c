@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:10:43 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/02 19:16:59 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/04 11:40:19 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	check_map(char **map, t_data *data)
 	int		i;
 
 	i = 0;
-	data->map.width = ft_strlen(map[i]) - 1;
+	data->map.width = ft_strlen(map[i]);
 	while (map[i])
 	{
 		if (!is_valid(map[i], data, i))
 			return (ERROR);
-		if ((ft_strlen(map[i]) - 1) != data->map.width)
+		if ((ft_strlen(map[i])) != data->map.width)
 			return (ERROR);
 		i++;
 	}
@@ -72,7 +72,6 @@ void	global_init(char **argv)
 	if (!data.mlx_ptr)
 		return ;
 	map = parse_map(argv, &data);
-	printf("map size = %d\t%d\n", data.map.width, data.map.height);
 	data.mlx_win = mlx_new_window(data.mlx_ptr, data.map.width * 50, data.map.height * 50, "so_long");
 	if (!data.mlx_win)
 		return (free(data.mlx_win));

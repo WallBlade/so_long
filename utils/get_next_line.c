@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 13:28:24 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/02 19:18:35 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/04 11:37:18 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ char	**get_all_map(int fd, char **argv, t_data *data)
 		map[i] = get_next_line(fd);
 		i++;
 	}
-	data->map.width = ft_strlen(map[0]);
 	map[i] = NULL;
 	return (map);
 }
