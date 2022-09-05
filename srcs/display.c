@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:51:32 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/02 19:19:13 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/05 23:49:12 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,21 @@ void	get_img_addr(char c, t_data *data, int x, int y)
 	mlx_destroy_image(data->mlx_ptr, img);
 }
 
-void	display_map(char **map, t_data *data)
+int	display_map(t_data *data)
 {
 	int	i;
 	int	j;
 	
 	i = 0;
-	while (map[i])
+	while (data->map.tab[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (data->map.tab[i][j])
 		{
-			get_img_addr(map[i][j], data, i, j);
+			get_img_addr(data->map.tab[i][j], data, i, j);
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }

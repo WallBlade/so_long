@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:06:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/02 19:16:18 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/05 23:39:56 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef	struct s_pos
 
 typedef	struct s_map
 {
+	char	**tab;
 	int		width;
 	int		height;
 	int		c;
@@ -51,13 +52,11 @@ typedef	struct s_data
 	t_map	map;
 }	t_data;
 
-
-
 //--------------- PARSING ---------------//
 
 int		check_file(char **argv);
-int		check_map(char **map, t_data *data);
-char	**parse_map(char **argv, t_data *data);
+int		check_map(t_data *data);
+void	parse_map(char **argv, t_data *data);
 void	global_init(char **argv);
 
 //--------------- MAIN ---------------//
@@ -66,13 +65,14 @@ int	main(int argc, char **argv);
 
 //--------------- EVENTS ---------------//
 
-int		no_event(void);
+int		no_event(t_data *data);
 int		keypress_handle(int keysym, t_data *data);
+void	all_hooks(t_data *data);
 
 //--------------- UTILS ---------------//
 
 char	*get_next_line(int fd);
-char	**get_all_map(int fd, char **argv, t_data *data);
+char	**get_all_map(int fd, char **argv);
 int		ft_strchr(const char *str);
 int		count_lines(char **argv);
 char	*ft_strjoin(char *s1, char *s2);
@@ -86,6 +86,6 @@ void	ft_bzero(void *s, size_t n);
 int		check_char(char *valid, char c);
 void	ft_putstr(char *str);
 int		is_surrounded(int c, int i, char k, t_data *data);
-void	display_map(char **map, t_data *data);
+int		display_map(t_data *data);
 
 #endif

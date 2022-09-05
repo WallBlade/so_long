@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:10:43 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/04 11:40:19 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/06 00:03:32 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,55 +28,58 @@ int	check_file(char **argv)
 	return (fd);
 }
 
-int	check_map(char **map, t_data *data)
+int	check_map(t_data *data)
 {
 	int		i;
 
 	i = 0;
-	data->map.width = ft_strlen(map[i]);
-	while (map[i])
+	data->map.width = ft_strlen(data->map.tab[i]);
+	while (data->map.tab[i])
 	{
-		if (!is_valid(map[i], data, i))
+		if (!is_valid(data->map.tab[i], data, i))
 			return (ERROR);
-		if ((ft_strlen(map[i])) != data->map.width)
+		if ((ft_strlen(data->map.tab[i])) != data->map.width)
 			return (ERROR);
 		i++;
 	}
+	data->map.height = i;
 	if (data->map.c < 1 || data->map.p != 1 || data->map.e != 1)
 		return (ERROR);
 	return (SUCCESS);
 }
 
-char	**parse_map(char **argv, t_data *data)
+void	parse_map(char **argv, t_data *data)
 {
-	char	**map;
 	int		fd;
 
 	fd = check_file(argv);
-	map = get_all_map(fd, argv, data);
-	if (!check_map(map, data))
+	data->map.tab = get_all_map(fd, argv);
+	if (!check_map(data))
 	{
-		ft_freetab(map, data->map.height);
+		ft_freetab(data->map.tab, data->map.height);
 		ft_print_error(4);
 	}
-	return (map);
 }
 
 void	global_init(char **argv)
 {
 	t_data	data;
-	char	**map;
+	int		w;
+	int		h;
 
 	ft_bzero(&data, sizeof(data));
-		data.mlx_ptr = mlx_init();
+	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return ;
-	map = parse_map(argv, &data);
-	data.mlx_win = mlx_new_window(data.mlx_ptr, data.map.width * 50, data.map.height * 50, "so_long");
+	parse_map(argv, &data);
+	w = data.map.width * 50;
+	h = data.map.height * 50;
+	data.mlx_win = mlx_new_window(data.mlx_ptr, w, h, "so_long");
 	if (!data.mlx_win)
 		return (free(data.mlx_win));
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, &keypress_handle, &data);
-	display_map(map, &data);
+	mlx_hook(data.mlx_win, 17, 1L<<5, &no_event, &data);
+	mlx_loop_hook(data.mlx_ptr, display_map, &data);
 	mlx_loop(data.mlx_ptr);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
