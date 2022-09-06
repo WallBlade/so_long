@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:51:32 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/05 23:49:12 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:22:14 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	display_map(t_data *data)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (data->map.tab[i])
 	{

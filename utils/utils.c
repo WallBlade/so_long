@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:29:15 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/02 18:45:47 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:20:05 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,11 @@ int	is_valid(char *str, t_data *data, int c)
 		if (str[i] == 'C')
 			data->map.c += 1;
 		if (str[i] == 'P')
+		{
+			data->player.x = i;
+			data->player.y = c;
 			data->map.p += 1;
+		}
 		if (str[i] == 'E')
 			data->map.e += 1;
 		if ((!is_surrounded(c, i, str[i], data)) || (!check_char("01CEP", str[i])))

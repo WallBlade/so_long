@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:06:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/05 23:39:56 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:51:07 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ typedef	struct s_map
 	int		c;
 	int		p;
 	int		e;
-	t_pos	pos;
-	t_pos	player;
 }	t_map;
 
 typedef	struct s_data
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
+	int		count;
 	t_map	map;
+	t_pos	player;
 }	t_data;
 
 //--------------- PARSING ---------------//
@@ -61,13 +61,14 @@ void	global_init(char **argv);
 
 //--------------- MAIN ---------------//
 
-int	main(int argc, char **argv);
+int		main(int argc, char **argv);
 
 //--------------- EVENTS ---------------//
 
 int		no_event(t_data *data);
 int		keypress_handle(int keysym, t_data *data);
 void	all_hooks(t_data *data);
+void	move_hooks(int keycode, t_data *data);
 
 //--------------- UTILS ---------------//
 

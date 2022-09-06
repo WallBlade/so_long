@@ -6,13 +6,13 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:22:41 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/04 11:41:43 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:21:59 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	if (argc != 2)
 		ft_print_error(2);
