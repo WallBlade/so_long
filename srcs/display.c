@@ -6,33 +6,43 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:51:32 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/06 14:22:14 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:26:57 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	init_img(t_data *data)
+{
+	data->walls.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr,
+			"img/walls.xpm", &data->walls.width, &data->walls.height);
+	data->player.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr,
+			"img/tanjiro.xpm", &data->player.width, &data->player.height);
+	data->land.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr,
+			"img/land.xpm", &data->land.width, &data->land.height);
+	data->pot.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr,
+			"img/pot.xpm", &data->pot.width, &data->pot.height);
+	data->exit.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr,
+			"img/pot.xpm", &data->pot.width, &data->pot.height);
+}
+
 void	get_img_addr(char c, t_data *data, int x, int y)
 {
-	void	*img;
-	char	*addr;
-	int		width;
-	int		height;
-
-	addr = NULL;
 	if (c == '1')
-		addr = "img/walls.xpm";
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
+				data->walls.mlx_img, y * 50, x * 50);
 	else if (c == '0')
-		addr = "img/land.xpm";
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
+				data->land.mlx_img, y * 50, x * 50);
 	else if (c == 'P')
-		addr = "img/tanjiro.xpm";
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
+				data->player.mlx_img, y * 50, x * 50);
 	else if (c == 'C')
-		addr = "img/collectible.xpm";
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
+				data->pot.mlx_img, y * 50, x * 50);
 	else if (c == 'E')
-		addr = "img/collectible.xpm";
-	img = mlx_xpm_file_to_image(data->mlx_ptr, addr, &width, &height);
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, img, y * 50, x * 50);
-	mlx_destroy_image(data->mlx_ptr, img);
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
+				data->pot.mlx_img, y * 50, x * 50);
 }
 
 int	display_map(t_data *data)
@@ -52,4 +62,12 @@ int	display_map(t_data *data)
 		i++;
 	}
 	return (0);
+}
+
+void	destroy_img(t_data *data)
+{
+	mlx_destroy_image(data->mlx_ptr, data->walls.mlx_img);
+	mlx_destroy_image(data->mlx_ptr, data->player.mlx_img);
+	mlx_destroy_image(data->mlx_ptr, data->land.mlx_img);
+	mlx_destroy_image(data->mlx_ptr, data->pot.mlx_img);
 }

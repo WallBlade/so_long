@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:06:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/06 14:51:07 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:42:02 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef	struct s_pos
 	int	y;
 }	t_pos;
 
-
 typedef	struct s_map
 {
 	char	**tab;
@@ -43,13 +42,27 @@ typedef	struct s_map
 	int		e;
 }	t_map;
 
+typedef	struct s_img
+{
+	void	*mlx_img;
+	int		width;
+	int		height;
+	char	*path;
+}	t_img;
+
+
 typedef	struct s_data
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
 	int		count;
+	t_img	walls;
+	t_img	player;
+	t_img	pot;
+	t_img	land;
+	t_img	exit;
 	t_map	map;
-	t_pos	player;
+	t_pos	p_pos;
 }	t_data;
 
 //--------------- PARSING ---------------//
@@ -65,15 +78,15 @@ int		main(int argc, char **argv);
 
 //--------------- EVENTS ---------------//
 
-int		no_event(t_data *data);
-int		keypress_handle(int keysym, t_data *data);
+int		mouse_click(t_data *data);
+int		keypress_handle(int keycode, t_data *data);
 void	all_hooks(t_data *data);
 void	move_hooks(int keycode, t_data *data);
 
 //--------------- UTILS ---------------//
 
 char	*get_next_line(int fd);
-char	**get_all_map(int fd, char **argv);
+char	**get_all_map(int fd, char **argv, t_data *data);
 int		ft_strchr(const char *str);
 int		count_lines(char **argv);
 char	*ft_strjoin(char *s1, char *s2);
@@ -88,5 +101,8 @@ int		check_char(char *valid, char c);
 void	ft_putstr(char *str);
 int		is_surrounded(int c, int i, char k, t_data *data);
 int		display_map(t_data *data);
+void	init_img(t_data *data);
+void	destroy_img(t_data *data);
+char	*ft_itoa(int nbr);
 
 #endif
