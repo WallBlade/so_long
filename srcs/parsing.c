@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:10:43 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/07 18:45:50 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:37:43 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	global_init(char **argv)
 	if (!data.mlx_ptr)
 		return ;
 	parse_map(argv, &data);
-	data.mlx_win = mlx_new_window(data.mlx_ptr, data.map.width * 50,
-			data.map.height * 50, "so_long");
+	data.mlx_win = mlx_new_window(data.mlx_ptr, (data.map.width + 1) * 50,
+			(data.map.height + 1) * 50, "so_long");
 	if (!data.mlx_win)
 		return (free(data.mlx_win));
 	init_img(&data);

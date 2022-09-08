@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 13:28:24 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/07 18:41:19 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:37:08 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	**get_all_map(int fd, char **argv, t_data *data)
 	map = malloc(sizeof(char *) * (size + 1));
 	if (!map)
 		return (NULL);
-	data->map.height = size;
+	data->map.height = size - 1;
 	while (size-- > 0)
 	{
 		map[i] = get_next_line(fd);

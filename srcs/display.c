@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:51:32 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/08 12:01:52 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/08 13:53:42 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ void	get_img_addr(char c, t_data *data, int x, int y)
 {
 	if (c == '1')
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
-				data->walls.mlx_img, y * 50, x * 50);
+			data->walls.mlx_img, y * 50, x * 50);
 	else if (c == '0')
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
-				data->land.mlx_img, y * 50, x * 50);
+			data->land.mlx_img, y * 50, x * 50);
 	else if (c == 'P')
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
-				data->player.mlx_img, y * 50, x * 50);
+			data->player.mlx_img, y * 50, x * 50);
 	else if (c == 'C')
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
-				data->pot.mlx_img, y * 50, x * 50);
+			data->pot.mlx_img, y * 50, x * 50);
 	else if (c == 'E')
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
-				data->exit.mlx_img, y * 50, x * 50);
+			data->exit.mlx_img, y * 50, x * 50);
 }
 
 int	display_map(t_data *data)

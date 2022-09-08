@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 13:28:18 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/08/31 16:04:57 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:18:21 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,22 @@ int	ft_strchr(const char *str)
 	return (ERROR);
 }
 
-int		count_lines(char **argv)
+int	count_lines(char **argv)
 {
 	int		fd;
 	int		count;
 	char	*line;
 
 	fd = open(argv[1], O_RDONLY);
-	count = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	count = 1;
+	while (count)
 	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			return (count - 1);
 		count++;
 		free(line);
 	}
 	close(fd);
-	return (count);
+	return (0);
 }

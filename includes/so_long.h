@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:06:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/08 12:18:44 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/08 17:43:11 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@ typedef	struct s_data
 	t_map	map;
 	t_pos	p_pos;
 }	t_data;
+
+typedef	struct s_path
+{
+	char	**map;
+	int		x;
+	int		y;
+}	t_path;
 
 //--------------- PARSING ---------------//
 

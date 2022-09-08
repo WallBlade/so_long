@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:56:45 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/07 18:46:56 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:39:37 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_bzero(void *s, size_t n)
 		ptr[i++] = '\0';
 }
 
-int		check_char(char *valid, char c)
+int	check_char(char *valid, char c)
 {
 	int	i;
 
@@ -54,15 +54,22 @@ int		check_char(char *valid, char c)
 	while (valid[i] && valid[i] != c)
 		i++;
 	if (valid[i] == '\0')
-			return (ERROR);
+		return (ERROR);
 	return (SUCCESS);
 }
 
-int		is_surrounded(int c, int i, char k, t_data *data)
+int	is_surrounded(int c, int i, char k, t_data *data)
 {
-	if (c == 0 || c == data->map.height
-		|| i == 0 || i == data->map.width)
+	if ((c != 0 || c != data->map.height)
+		&& (i == 0 || i == data->map.width))
+	{
 		if (k != '1')
 			return (ERROR);
+	}
+	else if (c == 0 || c == data->map.height)
+	{
+		if (k != '1')
+			return (ERROR);
+	}
 	return (SUCCESS);
 }

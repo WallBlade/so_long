@@ -6,11 +6,17 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:22:41 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/07 17:01:58 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:56:55 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	mouse_click(t_data *data)
+{
+	mlx_loop_end(data->mlx_ptr);
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
