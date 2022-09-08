@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:06:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/07 18:42:02 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:18:44 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,6 @@ int		is_surrounded(int c, int i, char k, t_data *data);
 int		display_map(t_data *data);
 void	init_img(t_data *data);
 void	destroy_img(t_data *data);
-char	*ft_itoa(int nbr);
+void	ft_putnbr(int nb);
 
 #endif

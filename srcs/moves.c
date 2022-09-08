@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 17:59:28 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/07 18:18:28 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:18:22 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ int	move_right(t_data *data)
 		data->map.tab[y][x + 1] = 'P';
 		data->count += 1;
 		data->p_pos.x++;
-		ft_putstr(ft_itoa(data->count));
+		ft_putnbr(data->count);
 		ft_putstr("\n");
 	}
 	if (data->map.tab[y][x + 1] == 'E' && data->map.c == 0)
+	{
 		mlx_loop_end(data->mlx_ptr);
+		ft_putstr("GG's\n");
+	}
 	return (0);
 }
 
@@ -50,11 +53,14 @@ int	move_left(t_data *data)
 		data->map.tab[y][x - 1] = 'P';
 		data->count += 1;
 		data->p_pos.x--;
-		ft_putstr(ft_itoa(data->count));
+		ft_putnbr(data->count);
 		ft_putstr("\n");
 	}
 	if (data->map.tab[y][x - 1] == 'E' && data->map.c == 0)
+	{
 		mlx_loop_end(data->mlx_ptr);
+		ft_putstr("GG's\n");
+	}
 	return (0);
 }
 
@@ -73,11 +79,14 @@ int	move_up(t_data *data)
 		data->map.tab[y - 1][x] = 'P';
 		data->count += 1;
 		data->p_pos.y--;
-		ft_putstr(ft_itoa(data->count));
+		ft_putnbr(data->count);
 		ft_putstr("\n");
 	}
 	if (data->map.tab[y - 1][x] == 'E' && data->map.c == 0)
+	{
 		mlx_loop_end(data->mlx_ptr);
+		ft_putstr("GG's\n");
+	}
 	return (0);
 }
 
@@ -96,11 +105,14 @@ int	move_down(t_data *data)
 		data->map.tab[y + 1][x] = 'P';
 		data->count += 1;
 		data->p_pos.y++;
-		ft_putstr(ft_itoa(data->count));
+		ft_putnbr(data->count);
 		ft_putstr("\n");
 	}
 	if (data->map.tab[y + 1][x] == 'E' && data->map.c == 0)
+	{
 		mlx_loop_end(data->mlx_ptr);
+		ft_putstr("GG's\n");
+	}
 	return (0);
 }
 

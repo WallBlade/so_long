@@ -6,57 +6,36 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:29:15 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/07 16:57:44 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:19:30 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static long	ft_numlen(long nb)
+void	ft_putchar(char c)
 {
-	long	size;
-
-	size = 0;
-	if (nb == 0)
-		size++;
-	if (nb < 0)
-	{
-		nb *= -1;
-		size++;
-	}
-	while (nb > 0)
-	{
-		nb /= 10;
-		size++;
-	}
-	return (size);
+	write(1, &c, 1);
 }
 
-char	*ft_itoa(int nbr)
+void	ft_putnbr(int nb)
 {
-	long	nb;
-	long	len;
-	char	*str;
-
-	nb = nbr;
-	len = ft_numlen(nb);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	str[len] = '\0';
-	if (nb == 0)
-		str[0] = '0';
+	if (nb == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return ;
+	}
 	if (nb < 0)
 	{
-		str[0] = '-';
 		nb *= -1;
+		write(1, "-", 1);
 	}
-	while (nb > 0)
+	if (nb > 9)
 	{
-		str[--len] = nb % 10 + 48;
-		nb /= 10;
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
 	}
-	return (str);
+	else
+		ft_putchar(nb + 48);
 }
 
 int	ft_strncmp(char *s1, char *s2, int n)

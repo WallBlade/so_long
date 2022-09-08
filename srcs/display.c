@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:51:32 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/07 17:26:57 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:01:52 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_img(t_data *data)
 	data->pot.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr,
 			"img/pot.xpm", &data->pot.width, &data->pot.height);
 	data->exit.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr,
-			"img/pot.xpm", &data->pot.width, &data->pot.height);
+			"img/exit.xpm", &data->exit.width, &data->exit.height);
 }
 
 void	get_img_addr(char c, t_data *data, int x, int y)
@@ -42,7 +42,7 @@ void	get_img_addr(char c, t_data *data, int x, int y)
 				data->pot.mlx_img, y * 50, x * 50);
 	else if (c == 'E')
 		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
-				data->pot.mlx_img, y * 50, x * 50);
+				data->exit.mlx_img, y * 50, x * 50);
 }
 
 int	display_map(t_data *data)
@@ -70,4 +70,5 @@ void	destroy_img(t_data *data)
 	mlx_destroy_image(data->mlx_ptr, data->player.mlx_img);
 	mlx_destroy_image(data->mlx_ptr, data->land.mlx_img);
 	mlx_destroy_image(data->mlx_ptr, data->pot.mlx_img);
+	mlx_destroy_image(data->mlx_ptr, data->exit.mlx_img);
 }
