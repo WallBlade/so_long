@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:10:43 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/08 14:37:43 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:10:38 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,19 @@ void	global_init(char **argv)
 	if (!data.mlx_ptr)
 		return ;
 	parse_map(argv, &data);
-	data.mlx_win = mlx_new_window(data.mlx_ptr, (data.map.width + 1) * 50,
-			(data.map.height + 1) * 50, "so_long");
-	if (!data.mlx_win)
-		return (free(data.mlx_win));
-	init_img(&data);
-	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, &keypress_handle, &data);
-	mlx_hook(data.mlx_win, 17, 1L << 5, mouse_click, &data);
-	mlx_loop_hook(data.mlx_ptr, display_map, &data);
-	mlx_loop(data.mlx_ptr);
-	destroy_img(&data);
-	ft_freetab(data.map.tab, data.map.height);
-	mlx_destroy_window(data.mlx_ptr, data.mlx_win);
-	mlx_destroy_display(data.mlx_ptr);
-	free(data.mlx_ptr);
+	flood_fill(&data);
+	// data.mlx_win = mlx_new_window(data.mlx_ptr, (data.map.width + 1) * 50,
+	// 		(data.map.height + 1) * 50, "so_long");
+	// if (!data.mlx_win)
+	// 	return (free(data.mlx_win));
+	// init_img(&data);
+	// mlx_hook(data.mlx_win, KeyPress, KeyPressMask, &keypress_handle, &data);
+	// mlx_hook(data.mlx_win, 17, 1L << 5, mouse_click, &data);
+	// mlx_loop_hook(data.mlx_ptr, display_map, &data);
+	// mlx_loop(data.mlx_ptr);
+	// destroy_img(&data);
+	// ft_freetab(data.map.tab, data.map.height);
+	// mlx_destroy_window(data.mlx_ptr, data.mlx_win);
+	// mlx_destroy_display(data.mlx_ptr);
+	// free(data.mlx_ptr);
 }

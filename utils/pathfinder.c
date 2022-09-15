@@ -12,49 +12,124 @@
 
 #include "so_long.h"
 
-void	init_copy(t_data *data, t_path *path)
+int	check_collectible(char **map)
 {
-	path->map = data->map.tab;
-	path->x = data->p_pos.x;
-	path->y = data->p_pos.y;
+	int	y;
+	int	x;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'C')
+				return (1);
+			x++;
+		}
+		y++;
+	}
+	return (0);
 }
 
-int		is_flooded(t_path *path)
+int	is_flooded(char **map)
 {
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 
-	i = 1;
-	while (path->map[i])
+	y = 0;
+	while (map[y])
 	{
-		j = 1;
-		while (path->map[i][j])
+		x = 0;
+		while (map[y][x])
 		{
-			if (path->map[i][j] == 'P')
+			if (map[y][x] == 'P')
 			{
-				if (path->map[i][j + 1] == '0' || path->map[i][j + 1] == 'C')
+				if (map[y][x + 1] == '0' || map[y][x + 1] == 'C')
 					return (0);
-				else if (path->map[i][j - 1] == '0' || path->map[i][j - 1] == 'C')
+				if (map[y][x - 1] == '0' || map[y][x + 1] == 'C')
 					return (0);
-				else if (path->map[i + 1][j] == '0' || path->map[i + 1][j] == 'C')
+				if (map[y + 1][x] == '0' || map[y][x + 1] == 'C')
 					return (0);
-				else if (path->map[i - 1][j] == '0' || path->map[i - 1][j] == 'C')
+				if (map[y - 1][x] == '0' || map[y][x + 1] == 'C')
 					return (0);
 			}
+			x++;
 		}
+		y++;
 	}
 	return (1);
 }
 
-void	flood_fill(t_path *path)
+void	fill(char **map, int y, int x)
 {
-	int	x;
-	int	y;
+	if (map[y][x + 1] == '0' || map[y][x + 1] == 'C')
+		map[y][x + 1] = 'P';
+	if (map[y][x - 1] == '0' || map[y][x - 1] == 'C')
+		map[y][x - 1] = 'P';
+	if (map[y + 1][x] == '0' || map[y + 1][x] == 'C')
+		map[y + 1][x] = 'P';
+	if (map[y - 1][x] == '0' || map[y - 1][x] == 'C')
+		map[y - 1][x] = 'P';
+}
 
-	x = path->x;
-	y = path->y;
-	while (!is_flooded(path))
+void	flood(char **map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (map[y])
 	{
-		if (path->map[y][x + 1])
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'P')
+				fill(map, y, x);
+			x++;
+		}
+		y++;
 	}
+}
+
+int	valid_path(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'E')
+			{
+				if (map[i][j + 1] == 'P')
+					return (1);
+				if (map[i][j - 1] == 'P')
+					return (1);
+				if (map[i + 1][j] == 'P')
+					return (1);
+				if (map[i - 1][j] == 'P')
+					return (1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	flood_fill(t_data *data)
+{
+	char	**map;
+
+	map = data->map.tab;
+	while (!is_flooded(map))
+		flood(map);
+	for (int i = 0; map[i]; i++)
+		printf("%s\n", map[i]);
+	if (valid_path(map) && !check_collectible(map))
+		printf("m3lem\n");
 }

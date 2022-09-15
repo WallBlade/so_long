@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:06:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/08 17:43:11 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:03:47 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,6 @@ typedef	struct s_data
 	t_pos	p_pos;
 }	t_data;
 
-typedef	struct s_path
-{
-	char	**map;
-	int		x;
-	int		y;
-}	t_path;
-
 //--------------- PARSING ---------------//
 
 int		check_file(char **argv);
@@ -111,5 +104,6 @@ int		display_map(t_data *data);
 void	init_img(t_data *data);
 void	destroy_img(t_data *data);
 void	ft_putnbr(int nb);
+void	flood_fill(t_data *data);
 
 #endif
