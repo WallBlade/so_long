@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:06:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/15 16:03:47 by smessal          ###   ########.fr       */
+/*   Updated: 2022/09/15 17:28:09 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int		display_map(t_data *data);
 void	init_img(t_data *data);
 void	destroy_img(t_data *data);
 void	ft_putnbr(int nb);
-void	flood_fill(t_data *data);
+int		flood_fill(t_data *data);
+int		check_collectible(char **map);
+char	**map_cpy(t_data *data);
 
 #endif

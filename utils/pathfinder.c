@@ -12,26 +12,6 @@
 
 #include "so_long.h"
 
-int	check_collectible(char **map)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map[y][x] == 'C')
-				return (1);
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
-
 int	is_flooded(char **map)
 {
 	int	y;
@@ -121,15 +101,15 @@ int	valid_path(char **map)
 	return (0);
 }
 
-void	flood_fill(t_data *data)
+int	flood_fill(t_data *data)
 {
 	char	**map;
 
-	map = data->map.tab;
+	map = map_cpy(data);
 	while (!is_flooded(map))
 		flood(map);
-	for (int i = 0; map[i]; i++)
-		printf("%s\n", map[i]);
 	if (valid_path(map) && !check_collectible(map))
-		printf("m3lem\n");
+		return (ft_freetab(map, data->map.height), SUCCESS);
+	else
+		return (ft_freetab(map, data->map.height), ERROR);
 }

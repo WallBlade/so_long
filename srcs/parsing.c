@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:10:43 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/15 16:10:38 by smessal          ###   ########.fr       */
+/*   Updated: 2022/09/15 17:22:25 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	parse_map(char **argv, t_data *data)
 
 	fd = check_file(argv);
 	data->map.tab = get_all_map(fd, argv, data);
-	if (!check_map(data))
+	if (!check_map(data) || !flood_fill(data))
 	{
 		ft_freetab(data->map.tab, data->map.height);
 		ft_print_error(4);
@@ -69,19 +69,18 @@ void	global_init(char **argv)
 	if (!data.mlx_ptr)
 		return ;
 	parse_map(argv, &data);
-	flood_fill(&data);
-	// data.mlx_win = mlx_new_window(data.mlx_ptr, (data.map.width + 1) * 50,
-	// 		(data.map.height + 1) * 50, "so_long");
-	// if (!data.mlx_win)
-	// 	return (free(data.mlx_win));
-	// init_img(&data);
-	// mlx_hook(data.mlx_win, KeyPress, KeyPressMask, &keypress_handle, &data);
-	// mlx_hook(data.mlx_win, 17, 1L << 5, mouse_click, &data);
-	// mlx_loop_hook(data.mlx_ptr, display_map, &data);
-	// mlx_loop(data.mlx_ptr);
-	// destroy_img(&data);
-	// ft_freetab(data.map.tab, data.map.height);
-	// mlx_destroy_window(data.mlx_ptr, data.mlx_win);
-	// mlx_destroy_display(data.mlx_ptr);
-	// free(data.mlx_ptr);
+	data.mlx_win = mlx_new_window(data.mlx_ptr, (data.map.width + 1) * 50,
+			(data.map.height + 1) * 50, "so_long");
+	if (!data.mlx_win)
+		return (free(data.mlx_win));
+	init_img(&data);
+	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, &keypress_handle, &data);
+	mlx_hook(data.mlx_win, 17, 1L << 5, mouse_click, &data);
+	mlx_loop_hook(data.mlx_ptr, display_map, &data);
+	mlx_loop(data.mlx_ptr);
+	destroy_img(&data);
+	ft_freetab(data.map.tab, data.map.height);
+	mlx_destroy_window(data.mlx_ptr, data.mlx_win);
+	mlx_destroy_display(data.mlx_ptr);
+	free(data.mlx_ptr);
 }

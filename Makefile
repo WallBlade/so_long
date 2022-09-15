@@ -1,5 +1,6 @@
 SRC		=	srcs/main.c utils/get_next_line.c utils/get_next_line_utils.c utils/utils.c \
 			srcs/parsing.c utils/utils_1.c srcs/display.c srcs/moves.c utils/pathfinder.c \
+			utils/utils_2.c \
 
 OBJ		= $(SRC:.c=.o)
 

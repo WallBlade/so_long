@@ -1,27 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 14:22:41 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/15 17:16:30 by zel-kass         ###   ########.fr       */
+/*   Created: 2022/09/15 17:23:00 by zel-kass          #+#    #+#             */
+/*   Updated: 2022/09/15 18:07:56 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	mouse_click(t_data *data)
+int	check_collectible(char **map)
 {
-	mlx_loop_end(data->mlx_ptr);
+	int	y;
+	int	x;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'C')
+				return (1);
+			x++;
+		}
+		y++;
+	}
 	return (0);
 }
 
-int	main(int argc, char **argv)
+char	**map_cpy(t_data *data)
 {
-	if (argc != 2)
-		ft_print_error(2);
-	global_init(argv);
-	return (0);
+	int		i;
+	char	**cpy;
+
+	i = 0;
+	cpy = malloc(sizeof(char *) * (data->map.height + 2));
+	while (data->map.tab[i])
+	{
+		cpy[i] = ft_strdup(data->map.tab[i]);
+		i++;
+	}
+	cpy[i] = 0;
+	return (cpy);
 }
