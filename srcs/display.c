@@ -6,13 +6,28 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:51:32 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/08 13:53:42 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/17 16:08:32 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	init_img(t_data *data)
+int	check_img(t_data *data)
+{
+	if (!data->walls.mlx_img)
+		return (destroy_img(data), 0);
+	else if (!data->player.mlx_img)
+		return (destroy_img(data), 0);
+	else if (!data->land.mlx_img)
+		return (destroy_img(data), 0);
+	else if (!data->pot.mlx_img)
+		return (destroy_img(data), 0);
+	else if (!data->exit.mlx_img)
+		return (destroy_img(data), 0);
+	return (1);
+}
+
+int	init_img(t_data *data)
 {
 	data->walls.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr,
 			"img/walls.xpm", &data->walls.width, &data->walls.height);
@@ -24,6 +39,9 @@ void	init_img(t_data *data)
 			"img/pot.xpm", &data->pot.width, &data->pot.height);
 	data->exit.mlx_img = mlx_xpm_file_to_image(data->mlx_ptr,
 			"img/exit.xpm", &data->exit.width, &data->exit.height);
+	if (!check_img(data))
+		return (ERROR);
+	return (SUCCESS);
 }
 
 void	get_img_addr(char c, t_data *data, int x, int y)
@@ -66,9 +84,14 @@ int	display_map(t_data *data)
 
 void	destroy_img(t_data *data)
 {
-	mlx_destroy_image(data->mlx_ptr, data->walls.mlx_img);
-	mlx_destroy_image(data->mlx_ptr, data->player.mlx_img);
-	mlx_destroy_image(data->mlx_ptr, data->land.mlx_img);
-	mlx_destroy_image(data->mlx_ptr, data->pot.mlx_img);
-	mlx_destroy_image(data->mlx_ptr, data->exit.mlx_img);
+	if (data->walls.mlx_img)
+		mlx_destroy_image(data->mlx_ptr, data->walls.mlx_img);
+	if (data->player.mlx_img)
+		mlx_destroy_image(data->mlx_ptr, data->player.mlx_img);
+	if (data->land.mlx_img)
+		mlx_destroy_image(data->mlx_ptr, data->land.mlx_img);
+	if (data->pot.mlx_img)
+		mlx_destroy_image(data->mlx_ptr, data->pot.mlx_img);
+	if (data->exit.mlx_img)
+		mlx_destroy_image(data->mlx_ptr, data->exit.mlx_img);
 }

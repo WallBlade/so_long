@@ -106,6 +106,8 @@ int	flood_fill(t_data *data)
 	char	**map;
 
 	map = map_cpy(data);
+	if (!map)
+		return (0);
 	while (!is_flooded(map))
 		flood(map);
 	if (valid_path(map) && !check_collectible(map))

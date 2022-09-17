@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:23:00 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/15 18:07:56 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/17 15:17:29 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char	**map_cpy(t_data *data)
 
 	i = 0;
 	cpy = malloc(sizeof(char *) * (data->map.height + 2));
+	if (!cpy)
+		return (NULL);
 	while (data->map.tab[i])
 	{
 		cpy[i] = ft_strdup(data->map.tab[i]);
