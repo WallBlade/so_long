@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 13:28:24 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/17 17:02:55 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:03:41 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	*get_next_line(int fd)
 		if (res == 0 && !stash[0])
 			return (free(stash), NULL);
 		stash = ft_strjoin(stash, buf);
+		if (!stash)
+			return (NULL);
 	}
 	line = ft_clean(stash, buf);
 	return (free(stash), line);

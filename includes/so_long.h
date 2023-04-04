@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:06:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/17 16:04:17 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:04:53 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@
 # define SUCCESS 1
 # define BUFFER_SIZE 1024
 
-typedef	struct s_pos
+typedef struct s_pos
 {
 	int	x;
 	int	y;
 }	t_pos;
 
-typedef	struct s_map
+typedef struct s_map
 {
 	char	**tab;
 	int		width;
@@ -42,7 +42,7 @@ typedef	struct s_map
 	int		e;
 }	t_map;
 
-typedef	struct s_img
+typedef struct s_img
 {
 	void	*mlx_img;
 	int		width;
@@ -50,8 +50,7 @@ typedef	struct s_img
 	char	*path;
 }	t_img;
 
-
-typedef	struct s_data
+typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
@@ -70,20 +69,23 @@ typedef	struct s_data
 int		check_file(char **argv);
 int		check_map(t_data *data);
 void	parse_map(char **argv, t_data *data);
+void	first_init(t_data *data);
 void	global_init(char **argv);
 
 //--------------- MAIN ---------------//
 
+int		mouse_click(t_data *data);
 int		main(int argc, char **argv);
 
-//--------------- EVENTS ---------------//
+//--------------- MOVES ---------------//
 
-int		mouse_click(t_data *data);
+int		move_right(t_data *data);
+int		move_left(t_data *data);
+int		move_up(t_data *data);
+int		move_down(t_data *data);
 int		keypress_handle(int keycode, t_data *data);
-void	all_hooks(t_data *data);
-void	move_hooks(int keycode, t_data *data);
 
-//--------------- UTILS ---------------//
+//--------------- GNL ---------------//
 
 char	*get_next_line(int fd);
 char	**get_all_map(int fd, char **argv, t_data *data);
@@ -92,6 +94,17 @@ int		count_lines(char **argv);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *src);
+
+//--------------- PATH ---------------//
+
+int		is_flooded(char **map);
+void	fill(char **map, int y, int x);
+void	flood(char **map);
+int		valid_path(char **map);
+int		flood_fill(t_data *data);
+
+//--------------- UTILS ---------------//
+
 int		ft_print_error(int error);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		is_valid(char *str, t_data *data, int c);
@@ -104,7 +117,6 @@ int		display_map(t_data *data);
 int		init_img(t_data *data);
 void	destroy_img(t_data *data);
 void	ft_putnbr(int nb);
-int		flood_fill(t_data *data);
 int		check_collectible(char **map);
 char	**map_cpy(t_data *data);
 

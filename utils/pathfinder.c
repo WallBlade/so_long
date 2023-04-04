@@ -27,11 +27,11 @@ int	is_flooded(char **map)
 			{
 				if (map[y][x + 1] == '0' || map[y][x + 1] == 'C')
 					return (0);
-				if (map[y][x - 1] == '0' || map[y][x + 1] == 'C')
+				if (map[y][x - 1] == '0' || map[y][x - 1] == 'C')
 					return (0);
-				if (map[y + 1][x] == '0' || map[y][x + 1] == 'C')
+				if (map[y + 1][x] == '0' || map[y][y + 1] == 'C')
 					return (0);
-				if (map[y - 1][x] == '0' || map[y][x + 1] == 'C')
+				if (map[y - 1][x] == '0' || map[y][y - 1] == 'C')
 					return (0);
 			}
 			x++;

@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 14:10:43 by zel-kass          #+#    #+#             */
-/*   Updated: 2022/09/17 16:16:46 by zel-kass         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:37:44 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,17 @@ void	parse_map(char **argv, t_data *data)
 	}
 }
 
+void	first_init(t_data *data)
+{
+	if (!init_img(data))
+	{
+		ft_freetab(data->map.tab, data->map.height);
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+		ft_print_error(1);
+	}
+}
+
 void	global_init(char **argv)
 {
 	t_data	data;
@@ -74,13 +85,7 @@ void	global_init(char **argv)
 		ft_freetab(data.map.tab, data.map.height);
 		return ;
 	}
-	if (!init_img(&data))
-	{
-		ft_freetab(data.map.tab, data.map.height);
-		mlx_destroy_display(data.mlx_ptr);
-		free(data.mlx_ptr);
-		ft_print_error(1);
-	}
+	first_init(&data);
 	data.mlx_win = mlx_new_window(data.mlx_ptr, (data.map.width + 1) * 50,
 			(data.map.height + 1) * 50, "so_long");
 	if (!data.mlx_win)
